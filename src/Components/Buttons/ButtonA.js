@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ButtonA.css';
 
 const ButtonA = (props) => {
 	return (
-		<a href="#" className="btn btn-light jumbotron__button mt-2">
+		<Link to="/create-event" className="btn btn-light jumbotron__button mt-2">
 			CREATE YOUR EVENT
-		</a>
+		</Link>
 	);
 };
 

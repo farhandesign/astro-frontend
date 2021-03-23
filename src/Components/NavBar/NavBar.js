@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './NavBar.css';
 import ButtonB from '../Buttons/ButtonB';
 
@@ -6,9 +7,9 @@ const NavBar = (props) => {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark" style={{ background: '#1F2128' }}>
 			<div className="container-fluid container-lg">
-				<a className="navbar-brand custom__logo" href="#">
+				<Link className="navbar-brand custom__logo" to="/">
 					evently
-				</a>
+				</Link>
 				<button
 					className="navbar-toggler"
 					type="button"
@@ -23,9 +24,9 @@ const NavBar = (props) => {
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav">
 						<li className="nav-item mx-3">
-							<a className="nav-link active" aria-current="page" href="#">
+							<Link className="nav-link active" aria-current="page" to="/events">
 								{props.links[0]}
-							</a>
+							</Link>
 						</li>
 						<li className="nav-item">
 							<ButtonB />
@@ -33,14 +34,14 @@ const NavBar = (props) => {
 					</ul>
 					<ul className="navbar-nav" style={{ marginLeft: 'auto' }}>
 						<li className="nav-item">
-							<a className="nav-link" aria-current="page" href="#">
+							<Link className="nav-link" aria-current="page" to="/login">
 								Login
-							</a>
+							</Link>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#">
+							<Link className="nav-link" to="signup">
 								Sign up
-							</a>
+							</Link>
 						</li>
 						{/* <li className="nav-item">
 							<a className="nav-link" href="#">
