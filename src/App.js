@@ -5,14 +5,13 @@ import Home from './Pages/Home/Home';
 import SignupPage from './Pages/Auth/SignupPage';
 import LayoutRoute from './Pages/LayoutRoute';
 
-
 function App() {
 	return (
 		<div className="App">
 			<BrowserRouter>
 				<Switch>
-				<LayoutRoute path="/" exact={true} component={Home} />
-				<LayoutRoute path="/signup" exact={true} component={SignupPage} />
+					<LayoutRoute path="/" exact={true} component={Home} />
+					<LayoutRoute path="/signup" exact={true} component={SignupPage} />
 				</Switch>
 			</BrowserRouter>
 		</div>
