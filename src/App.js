@@ -1,13 +1,20 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import NavBar from './Components/NavBar/NavBar';
 import Home from './Pages/Home/Home';
+import SignupPage from './Pages/Auth/SignupPage';
+import LayoutRoute from './Pages/LayoutRoute';
+
 
 function App() {
 	return (
 		<div className="App">
-			<NavBar links={[ 'Events', 'Create An Event' ]} />
-			<Home />
+			<BrowserRouter>
+				<Switch>
+				<LayoutRoute path="/" exact={true} component={Home} />
+				<LayoutRoute path="/signup" exact={true} component={SignupPage} />
+				</Switch>
+			</BrowserRouter>
 		</div>
 	);
 }
