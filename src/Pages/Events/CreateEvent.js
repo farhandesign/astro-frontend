@@ -7,6 +7,7 @@ import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from 
 
 const CreateEvent = () => {
 	const [ selectedDate, setSelectedDate ] = useState(new Date(Date.now()));
+
 	const handleDateChange = (date) => {
 		setSelectedDate(date);
 	};

@@ -1,56 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../Card/Card';
-
-const cardContent = [
-	{
-		title: 'Visit Dubai',
-		description: 'Some quick example text to build on the card title and make up the bulk of the cards content.',
-		imgSrc:
-			'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-	},
-	{
-		title: 'Explore Abu Dhabi',
-		description: 'Some quick example text to build on the card title and make up the bulk of the cards content.',
-		imgSrc:
-			'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-	},
-	{
-		title: 'Ras Al Khaimah Tour',
-		description: 'Some quick example text to build on the card title and make up the bulk of the cards content.',
-		imgSrc:
-			'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-	},
-	{
-		title: 'Ras Al Khaimah Tour',
-		description: 'Some quick example text to build on the card title and make up the bulk of the cards content.',
-		imgSrc:
-			'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-	},
-	{
-		title: 'Ras Al Khaimah Tour',
-		description: 'Some quick example text to build on the card title and make up the bulk of the cards content.',
-		imgSrc:
-			'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-	},
-	{
-		title: 'Ras Al Khaimah Tour',
-		description: 'Some quick example text to build on the card title and make up the bulk of the cards content.',
-		imgSrc:
-			'https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-	}
-];
+import { Link } from 'react-router-dom';
 
 const CardSection = () => {
+	const [ events, setEvents ] = useState(null);
+	useEffect(() => {
+		fetch('http://localhost:3500/events')
+			.then((res) => {
+				return res.json();
+			})
+			.then((data) => {
+				setEvents(data);
+			});
+	}, []);
+
 	return (
 		<div className="container py-5">
 			<div className="row">
 				<div className="col-12">
-					<h1>Upcoming Events</h1>
+					<h1>Latest Events</h1>
 				</div>
-				{cardContent.map((card) => {
-					return <Card title={card.title} imgSrc={card.imgSrc} description={card.description} />;
-				})}
+				{events &&
+					events
+						.map((event) => {
+							return (
+								<Card
+									key={event._id}
+									title={event.name}
+									imgSrc={event.eventImg}
+									description={event.description}
+									location={event.address}
+									date={event.eventDate.slice(0, 15)}
+									time={event.eventDate.slice(15, 33)}
+									link={`/events/${event._id}`}
+								/>
+							);
+						})
+						.reverse()
+						.slice(0, 6)}
 			</div>
+			<Link to="/events">Show More</Link>
 		</div>
 	);
 };

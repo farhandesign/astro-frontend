@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home/Home';
 import SignupPage from './Pages/Auth/SignupPage';
@@ -16,7 +16,7 @@ function App() {
 					<LayoutRoute path="/" exact={true} component={Home} />
 					<LayoutRoute path="/signup" exact={true} component={SignupPage} />
 					<LayoutRoute path="/create-event" exact={true} component={CreateEvent} />
-					<LayoutRoute path="/event" exact={true} component={Event} />
+					<LayoutRoute path="/events/:id" exact={true} component={Event} />
 					<LayoutRoute path="/events" exact={true} component={AllEvents} />
 				</Switch>
 			</BrowserRouter>
