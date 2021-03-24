@@ -5,6 +5,7 @@ import Home from './Pages/Home/Home';
 import SignupPage from './Pages/Auth/SignupPage';
 import LayoutRoute from './Pages/LayoutRoute';
 import Event from './Pages/Events/Event';
+import AllEvents from './Pages/Events/AllEvents';
 import CreateEvent from './Pages/Events/CreateEvent';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 					<LayoutRoute path="/signup" exact={true} component={SignupPage} />
 					<LayoutRoute path="/create-event" exact={true} component={CreateEvent} />
 					<LayoutRoute path="/event" exact={true} component={Event} />
+					<LayoutRoute path="/events" exact={true} component={AllEvents} />
 				</Switch>
 			</BrowserRouter>
 		</div>
