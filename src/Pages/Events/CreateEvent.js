@@ -8,10 +8,6 @@ import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from 
 const CreateEvent = () => {
 	const [ selectedDate, setSelectedDate ] = useState(new Date(Date.now()));
 
-	const handleDateChange = (date) => {
-		setSelectedDate(date);
-	};
-
 	// * This component will have four states:
 	// "initial", "creating", "successful", "unsuccessful", "failed"
 	const [ state, setState ] = useState('initial');
@@ -24,12 +20,23 @@ const CreateEvent = () => {
 	// For the form Images
 	const formData = new FormData();
 
+	// Attach File
 	const attachFile = (evt) => {
 		const files = Array.from(evt.target.files);
 
 		files.forEach((file, index) => {
 			formData.append(index, file);
 		});
+	};
+
+	// Select Date
+	const handleDateChange = (date) => {
+		const theTimestamp = Date.parse(date);
+		const theDate = new Date(theTimestamp);
+		// `${theDate.getDay()}/${theDate.getMonth()}/${theDate.getFullYear()}`;
+
+		formData.append('eventDate', theDate.toUTCString());
+		// setSelectedDate(date);
 	};
 
 	const create = () => {
@@ -54,7 +61,6 @@ const CreateEvent = () => {
 			formData.append('name', titleField.value);
 			formData.append('description', descriptionField.value);
 			formData.append('address', addressField.value);
-			formData.append('eventDate', selectedDate);
 
 			fetch('http://localhost:3500/events/create-event', {
 				method: 'POST',
@@ -117,17 +123,6 @@ const CreateEvent = () => {
 							margin="normal"
 							id="date-picker"
 							label="Pick A Date"
-							value={selectedDate}
-							onChange={handleDateChange}
-							KeyboardButtonProps={{
-								'aria-label': 'change date'
-							}}
-						/>
-						<KeyboardTimePicker
-							variant="inline"
-							margin="normal"
-							id="time-picker"
-							label="Pick A Time"
 							value={selectedDate}
 							onChange={handleDateChange}
 							KeyboardButtonProps={{

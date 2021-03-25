@@ -30,8 +30,8 @@ const CardSection = () => {
 									imgSrc={event.eventImg}
 									description={event.description}
 									location={event.address}
-									date={event.eventDate.slice(0, 15)}
-									time={event.eventDate.slice(15, 33)}
+									date={event.eventDate}
+									time={event.eventDate}
 									link={`/events/${event._id}`}
 								/>
 							);
@@ -39,7 +39,9 @@ const CardSection = () => {
 						.reverse()
 						.slice(0, 6)}
 			</div>
-			<Link to="/events">Show More</Link>
+			<Link to="/events" className="btn btn-outline-primary my-3">
+				View All Events
+			</Link>
 		</div>
 	);
 };

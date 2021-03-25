@@ -1,7 +1,11 @@
 import React from 'react';
 import './Card.css';
 import { Link } from 'react-router-dom';
+
 const Card = (props) => {
+	const formatDate = (props) => {
+		return props.date.slice(0, 10).split('-').reverse().join('-');
+	};
 	return (
 		<div className="col-lg-4 col-md-6 col-sm-12 my-3">
 			<div className="card">
@@ -21,7 +25,7 @@ const Card = (props) => {
 							className="col-6 d-flex align-items-center justify-content-center"
 							style={{ borderRight: '1px solid #DFDFDF' }}
 						>
-							{props.date}
+							{formatDate(props)}
 						</span>
 						<span className="col-6 d-flex align-items-center justify-content-center">{props.time}</span>
 					</li>

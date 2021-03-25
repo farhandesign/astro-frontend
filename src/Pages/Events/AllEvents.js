@@ -35,15 +35,20 @@ const AllEvents = () => {
 									imgSrc={event.eventImg}
 									description={event.description}
 									location={event.address}
-									date={event.eventDate.slice(0, 15)}
-									time={event.eventDate.slice(15, 33)}
+									date={event.eventDate}
+									time={event.eventDate}
+									link={`/events/${event._id}`}
 								/>
 							);
 						})
 						.reverse()
 						.slice(0, slice)}
 			</div>
-			{slice <= arr.length && <button onClick={handleShow}>Show More</button>}
+			{slice <= arr.length && (
+				<button className="btn btn-outline-primary my-3" onClick={handleShow}>
+					Show More
+				</button>
+			)}
 		</div>
 	);
 };
