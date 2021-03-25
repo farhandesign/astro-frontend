@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import DeleteEvent from './DeleteEvent';
 
 const Event = (props) => {
 	const [ event, setEvent ] = useState();
-	console.log(props);
+
 	useEffect(() => {
 		fetch(`http://localhost:3500/events/${props.match.params.id}`)
 			.then((res) => {
@@ -41,12 +43,17 @@ const Event = (props) => {
 									<div className="row text-start">
 										<h1>{e.name}</h1>
 										<p>{e.description}</p>
-										<p>{e.eventDate.slice(0, 10).split('-').reverse().join('-')}</p>
+										<p>{e.eventDate && e.eventDate.slice(0, 10).split('-').reverse().join('-')}</p>
 										<p>{e.time}</p>
+										<p>{e.price} AED / Guest</p>
 										<p>{e.address}</p>
-										<p>{e.host}</p>
+										<p>Hosted By: {e.host}</p>
 									</div>
 								</div>
+								<Link to={`/events/update/${e._id}`} className="btn btn-outline-primary my-3">
+									Edit Details
+								</Link>
+								<DeleteEvent {...props} />
 							</div>
 						);
 					})}
