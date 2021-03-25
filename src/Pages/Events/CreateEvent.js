@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
 import 'date-fns';
-import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
 const CreateEvent = () => {
 	const [ selectedDate, setSelectedDate ] = useState(new Date(Date.now()));
+	let timeArr = [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12' ];
+	let minArr = [ '00', '15', '30', '45' ];
 
 	// * This component will have four states:
 	// "initial", "creating", "successful", "unsuccessful", "failed"
@@ -16,6 +17,10 @@ const CreateEvent = () => {
 	let titleField;
 	let descriptionField;
 	let addressField;
+	let hostField;
+	let hourField;
+	let timePeriodField;
+	let minField;
 
 	// For the form Images
 	const formData = new FormData();
@@ -49,6 +54,12 @@ const CreateEvent = () => {
 		if (descriptionField.value.length === 0) {
 			errors.push('Please enter a description');
 		}
+		if (hostField.value.length === 0) {
+			errors.push('Please enter a host');
+		}
+		if (addressField.value.length === 0) {
+			errors.push('Please enter a location');
+		}
 		// 1.1 If fields are invalid, setState("unsuccessful")
 		if (errors.length > 0) {
 			setState('failed');
@@ -57,10 +68,13 @@ const CreateEvent = () => {
 			// 1.2 If the fields are valid, setState("sending")
 			// 2 Show "creating..." and invoke the fetch()
 			setState('creating');
+			let totalTime = hourField.value + minField.value + timePeriodField.value;
 
 			formData.append('name', titleField.value);
+			formData.append('host', hostField.value);
 			formData.append('description', descriptionField.value);
 			formData.append('address', addressField.value);
+			formData.append('time', totalTime);
 
 			fetch('http://localhost:3500/events/create-event', {
 				method: 'POST',
@@ -115,22 +129,83 @@ const CreateEvent = () => {
 			</div>
 
 			<div className="mb-3 d-flex">
-				<MuiPickersUtilsProvider utils={DateFnsUtils}>
-					<Grid container justify="space-between">
-						<KeyboardDatePicker
-							variant="inline"
-							format="MM/dd/yyy"
-							margin="normal"
-							id="date-picker"
-							label="Pick A Date"
-							value={selectedDate}
-							onChange={handleDateChange}
-							KeyboardButtonProps={{
-								'aria-label': 'change date'
-							}}
-						/>
-					</Grid>
-				</MuiPickersUtilsProvider>
+				<div className="row" style={{ width: '100%' }}>
+					<div className="col-lg-6 col-md-12">
+						<MuiPickersUtilsProvider utils={DateFnsUtils}>
+							<KeyboardDatePicker
+								variant="inline"
+								format="MM/dd/yyy"
+								margin="normal"
+								id="date-picker"
+								label="Pick A Date"
+								value={selectedDate}
+								onChange={handleDateChange}
+								KeyboardButtonProps={{
+									'aria-label': 'change date'
+								}}
+							/>
+						</MuiPickersUtilsProvider>
+					</div>
+					<div className="col-lg-6 col-md-12 d-flex">
+						<select
+							ref={(element) => (hourField = element)}
+							type="text"
+							className="form-select form-select-sm mt-4"
+							aria-label=".form-select-sm example"
+							style={{ width: '120px', maxHeight: '40px' }}
+						>
+							<option defaultValue="HOur">Hour</option>
+							{timeArr &&
+								timeArr.map((time) => {
+									return (
+										<option key={time} value={time}>
+											{time}
+										</option>
+									);
+								})}
+						</select>
+						<select
+							ref={(element) => (minField = element)}
+							type="text"
+							className="form-select form-select-sm mt-4 mx-2"
+							aria-label=".form-select-sm example"
+							style={{ width: '120px', maxHeight: '40px' }}
+						>
+							<option defaultValue="Minute">Minute</option>
+							{minArr &&
+								minArr.map((min) => {
+									return (
+										<option key={min} value={':' + min}>
+											{min}
+										</option>
+									);
+								})}
+						</select>
+
+						<select
+							ref={(element) => (timePeriodField = element)}
+							className="form-select form-select-sm mt-4"
+							aria-label=".form-select-sm example"
+							style={{ width: '80px', maxHeight: '40px' }}
+						>
+							<option defaultValue="PM">PM</option>
+							<option value="AM">AM</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div className="mb-3">
+				<label htmlFor="exampleInputHost1" className="form-label">
+					Hosted By:
+				</label>
+				<input
+					type="text"
+					ref={(element) => (hostField = element)}
+					className="form-control"
+					id="exampleInputHost1"
+					aria-describedby="HostHelp"
+				/>
 			</div>
 
 			<div className="mb-3">
@@ -148,7 +223,7 @@ const CreateEvent = () => {
 
 			{state !== 'creating' &&
 			state !== 'successful' && (
-				<button onClick={create} type="submit" className="btn btn-primary mb-4">
+				<button onClick={create} type="submit" className="btn btn-primary mb-4 mt-2">
 					Create
 				</button>
 			)}

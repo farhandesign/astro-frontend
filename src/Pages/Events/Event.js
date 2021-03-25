@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Card from '../../Components/Card/Card';
 
 const Event = (props) => {
 	const [ event, setEvent ] = useState();
@@ -19,14 +18,36 @@ const Event = (props) => {
 				{event &&
 					event.map((e) => {
 						return (
-							<Card
-								title={e.name}
-								imgSrc={e.eventImg}
-								description={e.description}
-								location={e.address}
-								date={e.eventDate.slice(0, 10).split('-').reverse().join('-')}
-								time={e.eventDate}
-							/>
+							<div key={e._id}>
+								<div
+									className="d-flex justify-content-center mt-3"
+									style={{
+										width: '100%',
+										maxHeight: '500px',
+										background: '#E6E2EA',
+										borderRadius: '8px',
+										overflow: 'hidden'
+									}}
+								>
+									<img
+										style={{ objectFit: 'cover' }}
+										src={e.eventImg}
+										className="card-img-top"
+										alt="..."
+									/>
+								</div>
+
+								<div className="row mt-4">
+									<div className="row text-start">
+										<h1>{e.name}</h1>
+										<p>{e.description}</p>
+										<p>{e.eventDate.slice(0, 10).split('-').reverse().join('-')}</p>
+										<p>{e.time}</p>
+										<p>{e.address}</p>
+										<p>{e.host}</p>
+									</div>
+								</div>
+							</div>
 						);
 					})}
 			</div>
