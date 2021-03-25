@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
-const CreateEvent = () => {
+const UpdateEvent = (props) => {
 	let history = useHistory();
 	const handleTimeout = () => {
 		setTimeout(() => {
-			history.push('/');
+			history.push(`/events/${props.match.params.id}`);
 		}, 1000);
 	};
+
+	const [ event, setEvent ] = useState();
+	useEffect(() => {
+		fetch(`http://localhost:3500/events/${props.match.params.id}`)
+			.then((res) => {
+				return res.json();
+			})
+			.then((data) => {
+				setEvent(data);
+			});
+	}, []);
 
 	const [ selectedDate, setSelectedDate ] = useState(new Date(Date.now()));
 	let timeArr = [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12' ];
@@ -33,15 +44,6 @@ const CreateEvent = () => {
 
 	// For the form Images
 	const formData = new FormData();
-
-	// Attach File
-	const attachFile = (evt) => {
-		const files = Array.from(evt.target.files);
-
-		files.forEach((file, index) => {
-			formData.append(index, file);
-		});
-	};
 
 	// Select Date
 	const handleDateChange = (date) => {
@@ -69,9 +71,6 @@ const CreateEvent = () => {
 		if (addressField.value.length === 0) {
 			errors.push('Please enter a location');
 		}
-		if (priceField.value.length === 0) {
-			errors.push('Please enter a Price');
-		}
 		// 1.1 If fields are invalid, setState("unsuccessful")
 		if (errors.length > 0) {
 			setState('failed');
@@ -85,12 +84,12 @@ const CreateEvent = () => {
 			formData.append('name', titleField.value);
 			formData.append('host', hostField.value);
 			formData.append('description', descriptionField.value);
-			formData.append('address', addressField.value);
 			formData.append('price', priceField.value);
+			formData.append('address', addressField.value);
 			formData.append('time', totalTime);
 
-			fetch('http://localhost:3500/events/create-event', {
-				method: 'POST',
+			fetch(`http://localhost:3500/events/update/${props.match.params.id}`, {
+				method: 'PATCH',
 				body: formData
 			})
 				// 2.1 If the Promise resolves, setState("successful")
@@ -106,16 +105,9 @@ const CreateEvent = () => {
 
 	return (
 		<div className="container text-start" style={{ maxWidth: '600px' }}>
-			<h1 className="mt-4 mb-3">Create An Event</h1>
-
-			<div className="mb-3">
-				<label htmlFor="formFile" className="form-label">
-					Upload Image
-				</label>
-				<input onChange={attachFile} className="form-control" type="file" id="formFile" />
-			</div>
-
-			<div className="mb-3">
+			<h1 className="mt-4 mb-3">Edit Event</h1>
+			<img style={{ objectFit: 'cover' }} src={event && event.eventImg} className="card-img-top" alt="..." />
+			<div className="mb-3 mt-3">
 				<label htmlFor="exampleInputTitle1" className="form-label">
 					Title
 				</label>
@@ -125,6 +117,8 @@ const CreateEvent = () => {
 					className="form-control"
 					id="exampleInputTitle1"
 					aria-describedby="titleHelp"
+					placeholder={event && event.name}
+					defaultValue={event && event.name}
 				/>
 			</div>
 			<div className="mb-3">
@@ -132,14 +126,18 @@ const CreateEvent = () => {
 					Description
 				</label>
 				<textarea
-					rows="3"
+					rows="7"
 					type="text"
 					ref={(element) => (descriptionField = element)}
 					className="form-control"
 					id="exampleInputDescription1"
 					aria-describedby="descriptionHelp"
+					placeholder={event && event.description}
+					defaultValue={event && event.description}
 				/>
 			</div>
+
+			<div className="alert alert-danger">Please select a Date and Time again.</div>
 
 			<div className="mb-3 d-flex">
 				<div className="row" style={{ width: '100%' }}>
@@ -167,7 +165,7 @@ const CreateEvent = () => {
 							aria-label=".form-select-sm example"
 							style={{ width: '120px', maxHeight: '40px' }}
 						>
-							<option defaultValue="HOur">Hour</option>
+							<option defaultValue="Hour">Hour</option>
 							{timeArr &&
 								timeArr.map((time) => {
 									return (
@@ -218,6 +216,8 @@ const CreateEvent = () => {
 					className="form-control"
 					id="exampleInputHost1"
 					aria-describedby="HostHelp"
+					placeholder={event && event.host}
+					defaultValue={event && event.host}
 				/>
 			</div>
 
@@ -230,6 +230,8 @@ const CreateEvent = () => {
 					ref={(element) => (priceField = element)}
 					className="form-control"
 					id="exampleInputPrice1"
+					placeholder={event && event.price}
+					defaultValue={event && event.price}
 					aria-describedby="PriceHelp"
 				/>
 			</div>
@@ -244,6 +246,8 @@ const CreateEvent = () => {
 					className="form-control"
 					id="exampleInputAddress1"
 					aria-describedby="AddressHelp"
+					placeholder={event && event.address}
+					defaultValue={event && event.address}
 				/>
 			</div>
 
@@ -270,4 +274,4 @@ const CreateEvent = () => {
 	);
 };
 
-export default CreateEvent;
+export default UpdateEvent;

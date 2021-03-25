@@ -7,6 +7,7 @@ import LayoutRoute from './Pages/LayoutRoute';
 import Event from './Pages/Events/Event';
 import AllEvents from './Pages/Events/AllEvents';
 import CreateEvent from './Pages/Events/CreateEvent';
+import UpdateEvent from './Pages/Events/UpdateEvent';
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 					<LayoutRoute path="/signup" exact={true} component={SignupPage} />
 					<LayoutRoute path="/create-event" exact={true} component={CreateEvent} />
 					<LayoutRoute path="/events/:id" exact={true} component={Event} />
+					<LayoutRoute path="/events/update/:id" exact={true} component={UpdateEvent} />
 					<LayoutRoute path="/events" exact={true} component={AllEvents} />
 				</Switch>
 			</BrowserRouter>

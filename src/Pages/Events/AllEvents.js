@@ -35,6 +35,7 @@ const AllEvents = () => {
 									imgSrc={event.eventImg}
 									description={event.description}
 									host={event.host}
+									price={event.price}
 									location={event.address}
 									date={event.eventDate}
 									time={event.time}

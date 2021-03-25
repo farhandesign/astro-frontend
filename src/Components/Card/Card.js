@@ -22,10 +22,11 @@ const Card = (props) => {
 					</p>
 				</div>
 				<ul className="list-group list-group-flush">
-					<li className="list-group-item d-flex justify-content-center">
+					<li className="list-group-item">
 						{props.date && formatDate(props)} at {props.time}
 					</li>
-					<li className="list-group-item">{props.host}</li>
+					<li className="list-group-item">{props.price} AED / Guest</li>
+					<li className="list-group-item">Hosted By: {props.host}</li>
 				</ul>
 				<div className="card-body">
 					<Link to={props.link} className="card-link">
