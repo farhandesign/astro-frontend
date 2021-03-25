@@ -17,19 +17,15 @@ const Card = (props) => {
 				/>
 				<div className="card-body">
 					<h5 className="card-title">{props.title}</h5>
-					<p className="card-text">{props.description}</p>
+					<p className="card-text" style={{ height: '50px' }}>
+						{props.description.slice(0, 100)} ...
+					</p>
 				</div>
 				<ul className="list-group list-group-flush">
 					<li className="list-group-item d-flex justify-content-center">
-						<span
-							className="col-6 d-flex align-items-center justify-content-center"
-							style={{ borderRight: '1px solid #DFDFDF' }}
-						>
-							{formatDate(props)}
-						</span>
-						<span className="col-6 d-flex align-items-center justify-content-center">{props.time}</span>
+						{props.date && formatDate(props)} at {props.time}
 					</li>
-					<li className="list-group-item">Event By UserName</li>
+					<li className="list-group-item">{props.host}</li>
 				</ul>
 				<div className="card-body">
 					<Link to={props.link} className="card-link">

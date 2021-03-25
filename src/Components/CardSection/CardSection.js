@@ -29,9 +29,10 @@ const CardSection = () => {
 									title={event.name}
 									imgSrc={event.eventImg}
 									description={event.description}
+									host={event.host}
 									location={event.address}
 									date={event.eventDate}
-									time={event.eventDate}
+									time={event.time}
 									link={`/events/${event._id}`}
 								/>
 							);
