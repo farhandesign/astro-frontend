@@ -39,20 +39,22 @@ const Event = (props) => {
 									/>
 								</div>
 
-								<div className="row mt-4">
-									<div className="row text-start">
+								<div className="row mt-4 text-start">
+									<div className="col-12 d-flex justify-content-between align-items-center mb-3">
 										<h1>{e.name}</h1>
-										<p>{e.description}</p>
-										<p>{e.eventDate && e.eventDate.slice(0, 10).split('-').reverse().join('-')}</p>
-										<p>{e.time}</p>
-										<p>{e.price} AED / Guest</p>
-										<p>{e.address}</p>
-										<p>Hosted By: {e.host}</p>
+										<Link to={`/events/update/${e._id}`} className="btn btn-outline-primary mb-2">
+											Edit Event
+										</Link>
 									</div>
+
+									<p>{e.description}</p>
+									<p>{e.eventDate && e.eventDate.slice(0, 10).split('-').reverse().join('-')}</p>
+									<p>{e.time}</p>
+									<p>{e.price} AED / Guest</p>
+									<p>{e.address}</p>
+									<p>Hosted By: {e.host}</p>
 								</div>
-								<Link to={`/events/update/${e._id}`} className="btn btn-outline-primary my-3">
-									Edit Details
-								</Link>
+
 								<DeleteEvent {...props} />
 							</div>
 						);
