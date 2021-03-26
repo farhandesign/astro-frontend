@@ -67,7 +67,6 @@ const Event = (props) => {
 										<li className="list-group-item">Hosted By: {e.host}</li>
 									</ul>
 									<div className="card-footer">
-										{' '}
 										<span style={{ marginRight: '10px' }}>Share On:</span>
 										<FacebookShareButton
 											className="share__icon"
