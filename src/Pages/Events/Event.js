@@ -4,6 +4,7 @@ import DeleteEvent from './DeleteEvent';
 import './Event.css';
 import { FacebookShareButton } from 'react-share';
 import { FacebookIcon } from 'react-share';
+import HelmetMetaData from './Helmet';
 
 const Event = (props) => {
 	const [ event, setEvent ] = useState();
@@ -64,15 +65,17 @@ const Event = (props) => {
 										<li className="list-group-item">Location: {e.address}</li>
 										<li className="list-group-item">Hosted By: {e.host}</li>
 										<li className="list-group-item">
+											<span style={{ marginRight: '10px' }}>Share On:</span>
 											<FacebookShareButton
 												url={`${process.env.REACT_APP_BACKEND}/events/${props.match.params.id}`}
 												quote={e.name}
 											>
-												<FacebookIcon round={true} />
+												<FacebookIcon size={30} round={true} />
 											</FacebookShareButton>
 										</li>
 									</ul>
 								</div>
+								<HelmetMetaData title={e.name} im={e.eventImg} />
 							</div>
 						);
 					})}
