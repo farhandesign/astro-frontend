@@ -21,6 +21,7 @@ const Event = (props) => {
 	return (
 		<div className="container text-center">
 			<div className="row d-flex justify-content-center">
+				<HelmetMetaData />
 				{event &&
 					event.map((e) => {
 						return (
@@ -66,8 +67,10 @@ const Event = (props) => {
 										<li className="list-group-item">Hosted By: {e.host}</li>
 										<li className="list-group-item">
 											<span style={{ marginRight: '10px' }}>Share On:</span>
+
 											<FacebookShareButton
-												url={`${process.env.REACT_APP_BACKEND}/events/${props.match.params.id}`}
+												url={`https://astro-events-frontend.herokuapp.com/events/${props.match
+													.params.id}`}
 												quote={e.name}
 											>
 												<FacebookIcon size={30} round={true} />
@@ -75,7 +78,6 @@ const Event = (props) => {
 										</li>
 									</ul>
 								</div>
-								<HelmetMetaData title={e.name} im={e.eventImg} />
 							</div>
 						);
 					})}
