@@ -65,37 +65,35 @@ const Event = (props) => {
 										<li className="list-group-item">Price: {e.price} AED / Guest</li>
 										<li className="list-group-item">Location: {e.address}</li>
 										<li className="list-group-item">Hosted By: {e.host}</li>
-										<li className="list-group-item">
-											<span style={{ marginRight: '10px' }}>Share On:</span>
-
-											<FacebookShareButton
-												className="share__icon"
-												url={`https://astro-events-frontend.herokuapp.com/events/${props.match
-													.params.id}`}
-												quote={e.name}
-											>
-												<FacebookIcon size={30} round={true} />
-											</FacebookShareButton>
-
-											<TwitterShareButton
-												className="share__icon"
-												url={`https://astro-events-frontend.herokuapp.com/events/${props.match
-													.params.id}`}
-												quote={e.name}
-											>
-												<TwitterIcon size={30} round={true} />
-											</TwitterShareButton>
-
-											<WhatsappShareButton
-												className="share__icon"
-												url={`https://astro-events-frontend.herokuapp.com/events/${props.match
-													.params.id}`}
-												quote={e.name}
-											>
-												<WhatsappIcon size={30} round={true} />
-											</WhatsappShareButton>
-										</li>
 									</ul>
+									<div className="card-footer">
+										{' '}
+										<span style={{ marginRight: '10px' }}>Share On:</span>
+										<FacebookShareButton
+											className="share__icon"
+											url={`https://astro-events-frontend.herokuapp.com/events/${props.match
+												.params.id}`}
+											quote={e.name}
+										>
+											<FacebookIcon size={30} round={true} />
+										</FacebookShareButton>
+										<TwitterShareButton
+											className="share__icon"
+											url={`https://astro-events-frontend.herokuapp.com/events/${props.match
+												.params.id}`}
+											quote={e.name}
+										>
+											<TwitterIcon size={30} round={true} />
+										</TwitterShareButton>
+										<WhatsappShareButton
+											className="share__icon"
+											url={`https://astro-events-frontend.herokuapp.com/events/${props.match
+												.params.id}`}
+											quote={e.name}
+										>
+											<WhatsappIcon size={30} round={true} />
+										</WhatsappShareButton>
+									</div>
 								</div>
 							</div>
 						);
