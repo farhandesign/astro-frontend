@@ -6,6 +6,9 @@ import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 're
 import { FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
 import HelmetMetaData from './HelmetMetaData';
 
+import { MdDateRange } from 'react-icons/md';
+import { FaTicketAlt } from 'react-icons/fa';
+
 const Event = (props) => {
 	const [ event, setEvent ] = useState();
 
@@ -59,10 +62,27 @@ const Event = (props) => {
 									</div>
 									<ul className="list-group list-group-flush">
 										<li className="list-group-item">
-											{e.eventDate && e.eventDate.slice(0, 10).split('-').reverse().join('-')} at{' '}
-											{e.time}
+											<MdDateRange size="1.5em" className="react__icons" color="#8C939D" />
+											{e.eventDate &&
+												e.eventDate.slice(0, 10).split('-').reverse().join('-')} at {e.time}
 										</li>
-										<li className="list-group-item">Price: {e.price} AED / Guest</li>
+										<li className="list-group-item d-flex align-items-center">
+											<FaTicketAlt size="1.5em" className="react__icons" color="#8C939D" /> Price:{' '}
+											{e.price} AED / Guest
+											<Link
+												to={`/payment/${e._id}`}
+												className="btn btn-warning"
+												style={{
+													marginLeft: '16px',
+													borderRadius: '50px',
+													padding: '5px 20px'
+												}}
+												event={e._id}
+												money={e.price}
+											>
+												Buy Ticket
+											</Link>
+										</li>
 										<li className="list-group-item">Location: {e.address}</li>
 										<li className="list-group-item">Hosted By: {e.host}</li>
 									</ul>

@@ -8,6 +8,7 @@ import Event from './Pages/Events/Event';
 import AllEvents from './Pages/Events/AllEvents';
 import CreateEvent from './Pages/Events/CreateEvent';
 import UpdateEvent from './Pages/Events/UpdateEvent';
+import PaymentPage from './Pages/Events/PaymentPage';
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 					<LayoutRoute path="/" exact={true} component={Home} />
 					<LayoutRoute path="/signup" exact={true} component={SignupPage} />
 					<LayoutRoute path="/events/:id" exact={true} component={Event} />
+					<LayoutRoute path="/payment/:id" exact={true} component={PaymentPage} />
 					<LayoutRoute path="/create-event" exact={true} component={CreateEvent} />
 					<LayoutRoute path="/events/update/:id" exact={true} component={UpdateEvent} />
 					<LayoutRoute path="/events" exact={true} component={AllEvents} />
