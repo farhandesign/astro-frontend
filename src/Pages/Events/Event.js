@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import DeleteEvent from './DeleteEvent';
 import './Event.css';
+import { FacebookShareButton } from 'react-share';
+import { FacebookIcon } from 'react-share';
 
 const Event = (props) => {
+	const location = useLocation();
 	const [ event, setEvent ] = useState();
 
 	useEffect(() => {
@@ -61,6 +64,11 @@ const Event = (props) => {
 										<li className="list-group-item">Price: {e.price} AED / Guest</li>
 										<li className="list-group-item">Location: {e.address}</li>
 										<li className="list-group-item">Hosted By: {e.host}</li>
+										<li className="list-group-item">
+											<FacebookShareButton url={location} quote={e.name}>
+												<FacebookIcon round={true} />
+											</FacebookShareButton>
+										</li>
 									</ul>
 								</div>
 							</div>
