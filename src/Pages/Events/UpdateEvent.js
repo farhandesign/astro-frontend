@@ -6,13 +6,6 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 
 const UpdateEvent = (props) => {
-	let history = useHistory();
-	const handleTimeout = () => {
-		setTimeout(() => {
-			history.push(`/events/${props.match.params.id}`);
-		}, 1000);
-	};
-
 	const [ event, setEvent ] = useState();
 	useEffect(() => {
 		fetch(`http://localhost:3500/events/${props.match.params.id}`)
@@ -101,6 +94,13 @@ const UpdateEvent = (props) => {
 					setState('unsuccessful');
 				});
 		}
+	};
+
+	let history = useHistory();
+	const handleTimeout = () => {
+		setTimeout(() => {
+			history.push(`/events/${props.match.params.id}`);
+		}, 1000);
 	};
 
 	return (

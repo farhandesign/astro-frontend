@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const ButtonB = (props) => {
 	return (
-		<Link className="nav-link btn btn-secondary active button__b" to="create-event">
+		<Link className="nav-link btn btn-secondary active button__b" to="/create-event">
 			Create An Event
 		</Link>
 	);
