@@ -30,7 +30,7 @@ const Card = (props) => {
 				</ul>
 				<div className="card-body">
 					<Link to={props.link} className="card-link">
-						Card link
+						View Event
 					</Link>
 				</div>
 			</div>
