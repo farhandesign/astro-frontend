@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import DeleteEvent from './DeleteEvent';
 import './Event.css';
-import { FacebookShareButton } from 'react-share';
-import { FacebookIcon } from 'react-share';
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
+import { FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
 import HelmetMetaData from './HelmetMetaData';
 
 const Event = (props) => {
@@ -25,6 +25,7 @@ const Event = (props) => {
 					event.map((e) => {
 						return (
 							<div key={e._id}>
+								<HelmetMetaData title={e.name} eventId={e._id} />
 								<div className="card text-start my-3" style={{ width: '100%', position: 'relative' }}>
 									<div
 										className="d-flex justify-content-center"
@@ -68,18 +69,31 @@ const Event = (props) => {
 											<span style={{ marginRight: '10px' }}>Share On:</span>
 
 											<FacebookShareButton
+												className="share__icon"
 												url={`https://astro-events-frontend.herokuapp.com/events/${props.match
 													.params.id}`}
 												quote={e.name}
 											>
 												<FacebookIcon size={30} round={true} />
 											</FacebookShareButton>
-											<HelmetMetaData
-												title={e.name}
-												image={e.eventImg}
-												description={e.description}
-												name={e.name}
-											/>
+
+											<TwitterShareButton
+												className="share__icon"
+												url={`https://astro-events-frontend.herokuapp.com/events/${props.match
+													.params.id}`}
+												quote={e.name}
+											>
+												<TwitterIcon size={30} round={true} />
+											</TwitterShareButton>
+
+											<WhatsappShareButton
+												className="share__icon"
+												url={`https://astro-events-frontend.herokuapp.com/events/${props.match
+													.params.id}`}
+												quote={e.name}
+											>
+												<WhatsappIcon size={30} round={true} />
+											</WhatsappShareButton>
 										</li>
 									</ul>
 								</div>
