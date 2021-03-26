@@ -6,6 +6,11 @@ import { FacebookShareButton, TwitterShareButton, WhatsappShareButton } from 're
 import { FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
 import HelmetMetaData from './HelmetMetaData';
 
+import { MdDateRange } from 'react-icons/md';
+import { FaTicketAlt } from 'react-icons/fa';
+import { ImLocation } from 'react-icons/im';
+import { GoOrganization } from 'react-icons/go';
+
 const Event = (props) => {
 	const [ event, setEvent ] = useState();
 
@@ -59,15 +64,24 @@ const Event = (props) => {
 									</div>
 									<ul className="list-group list-group-flush">
 										<li className="list-group-item">
-											{e.eventDate && e.eventDate.slice(0, 10).split('-').reverse().join('-')} at{' '}
-											{e.time}
+											<MdDateRange className="react__icons" size="1.3em" color="#8C939D" />
+											{e.eventDate &&
+												e.eventDate.slice(0, 10).split('-').reverse().join('-')} at {e.time}
 										</li>
-										<li className="list-group-item">Price: {e.price} AED / Guest</li>
-										<li className="list-group-item">Location: {e.address}</li>
-										<li className="list-group-item">Hosted By: {e.host}</li>
+										<li className="list-group-item">
+											<FaTicketAlt className="react__icons" size="1.3em" color="#8C939D" /> Price:{' '}
+											{e.price} AED / Guest
+										</li>
+										<li className="list-group-item">
+											<ImLocation className="react__icons" size="1.3em" color="#8C939D" />{' '}
+											Location: {e.address}
+										</li>
+										<li className="list-group-item">
+											<GoOrganization className="react__icons" size="1.3em" color="#8C939D" />
+											Hosted By: {e.host}
+										</li>
 									</ul>
 									<div className="card-footer">
-										{' '}
 										<span style={{ marginRight: '10px' }}>Share On:</span>
 										<FacebookShareButton
 											className="share__icon"

@@ -13,7 +13,7 @@ const CreateEvent = () => {
 		}, 1000);
 	};
 
-	const [ selectedDate, setSelectedDate ] = useState(new Date(Date.now()));
+	const [ selectedDate ] = useState(new Date(Date.now()));
 	let timeArr = [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12' ];
 	let minArr = [ '00', '15', '30', '45' ];
 
