@@ -2,7 +2,10 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 const HelmetMetaData = (props) => {
-	let title = 'Hiiiiiiiiiii';
+	let title = props.title;
+	let image = props.image;
+	let description = props.description;
+	let quote = props.name;
 
 	return (
 		<Helmet>
@@ -19,14 +22,19 @@ const HelmetMetaData = (props) => {
 			<meta name="_token" content="" />
 			<meta name="robots" content="noodp" />
 			<meta property="title" content={title} />
-
+			<meta property="quote" content={quote} />
+			<meta name="description" content={description} />
+			<meta property="image" content={image} />
 			<meta property="og:locale" content="en_US" />
 			<meta property="og:type" content="website" />
 			<meta property="og:title" content={title} />
+			<meta property="og:quote" content={quote} />
 
+			<meta property="og:image" content={image} />
 			<meta content="image/*" property="og:image:type" />
 
 			<meta property="og:site_name" content="CampersTribe" />
+			<meta property="og:description" content={description} />
 		</Helmet>
 	);
 };

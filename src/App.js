@@ -16,7 +16,6 @@ function App() {
 				<Switch>
 					<LayoutRoute path="/" exact={true} component={Home} />
 					<LayoutRoute path="/signup" exact={true} component={SignupPage} />
-
 					<LayoutRoute path="/events/:id" exact={true} component={Event} />
 					<LayoutRoute path="/create-event" exact={true} component={CreateEvent} />
 					<LayoutRoute path="/events/update/:id" exact={true} component={UpdateEvent} />

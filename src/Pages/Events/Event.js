@@ -4,7 +4,7 @@ import DeleteEvent from './DeleteEvent';
 import './Event.css';
 import { FacebookShareButton } from 'react-share';
 import { FacebookIcon } from 'react-share';
-import HelmetMetaData from './Helmet';
+import HelmetMetaData from './HelmetMetaData';
 
 const Event = (props) => {
 	const [ event, setEvent ] = useState();
@@ -21,7 +21,6 @@ const Event = (props) => {
 	return (
 		<div className="container text-center">
 			<div className="row d-flex justify-content-center">
-				<HelmetMetaData />
 				{event &&
 					event.map((e) => {
 						return (
@@ -75,6 +74,12 @@ const Event = (props) => {
 											>
 												<FacebookIcon size={30} round={true} />
 											</FacebookShareButton>
+											<HelmetMetaData
+												title={e.name}
+												image={e.eventImg}
+												description={e.description}
+												name={e.name}
+											/>
 										</li>
 									</ul>
 								</div>
