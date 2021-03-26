@@ -1,0 +1,12 @@
+.btn-danger {
+	font-size: 15px;
+}
+
+@media only screen and (max-width: 360px) {
+	.event__title {
+		font-size: 24px;
+	}
+	.btn-danger {
+		font-size: 14px;
+	}
+}

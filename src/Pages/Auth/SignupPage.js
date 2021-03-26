@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const validateEmail = (email) => {
 	// eslint-disable-next-line
@@ -12,6 +13,13 @@ const validatePassword = (password) => {
 };
 
 const SignupPage = () => {
+	let history = useHistory();
+	const handleTimeout = () => {
+		setTimeout(() => {
+			history.push('/');
+		}, 1000);
+	};
+
 	/*
      * This component will have four states:
      * "initial", "sending", "successful", "unsuccessful"
@@ -136,6 +144,7 @@ const SignupPage = () => {
 			{state === 'sending' && <p mt-3>sending...</p>}
 
 			{state === 'successful' && <div className="alert alert-success mt-3">Successful</div>}
+			{state === 'successful' && handleTimeout()}
 
 			{state === 'unsuccessful' && <div className="alert alert-danger mt-3">Please try again.</div>}
 		</div>
