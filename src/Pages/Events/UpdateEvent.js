@@ -8,7 +8,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 const UpdateEvent = (props) => {
 	const [ event, setEvent ] = useState();
 	useEffect(() => {
-		fetch(`http://localhost:3500/events/${props.match.params.id}`)
+		fetch(`${process.env.REACT_APP_BACKEND}/events/${props.match.params.id}`)
 			.then((res) => {
 				return res.json();
 			})
@@ -81,7 +81,7 @@ const UpdateEvent = (props) => {
 			formData.append('address', addressField.value);
 			formData.append('time', totalTime);
 
-			fetch(`http://localhost:3500/events/update/${props.match.params.id}`, {
+			fetch(`${process.env.REACT_APP_BACKEND}/events/update/${props.match.params.id}`, {
 				method: 'PATCH',
 				body: formData
 			})

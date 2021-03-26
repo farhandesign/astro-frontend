@@ -6,7 +6,7 @@ const AllEvents = () => {
 	const [ slice, setSlice ] = useState(6);
 	const [ events, setEvents ] = useState(null);
 	useEffect(() => {
-		fetch('http://localhost:3500/events')
+		fetch(`${process.env.REACT_APP_BACKEND}/events`)
 			.then((res) => {
 				return res.json();
 			})

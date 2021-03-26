@@ -7,7 +7,7 @@ const Event = (props) => {
 	const [ event, setEvent ] = useState();
 
 	useEffect(() => {
-		fetch(`http://localhost:3500/events/${props.match.params.id}`)
+		fetch(`${process.env.REACT_APP_BACKEND}/events/${props.match.params.id}`)
 			.then((res) => {
 				return res.json();
 			})

@@ -7,7 +7,7 @@ const DeleteEvent = (props) => {
 	let history = useHistory();
 
 	const handleDelete = () => {
-		fetch(`http://localhost:3500/events/delete/${props.match.params.id}`, {
+		fetch(`${process.env.REACT_APP_BACKEND}/events/delete/${props.match.params.id}`, {
 			method: 'DELETE'
 		})
 			// 2.1 If the Promise resolves, setState("successful")

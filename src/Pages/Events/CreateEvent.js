@@ -89,7 +89,7 @@ const CreateEvent = () => {
 			formData.append('price', priceField.value);
 			formData.append('time', totalTime);
 
-			fetch('http://localhost:3500/events/create-event', {
+			fetch(`${process.env.REACT_APP_BACKEND}/events/create-event`, {
 				method: 'POST',
 				body: formData
 			})

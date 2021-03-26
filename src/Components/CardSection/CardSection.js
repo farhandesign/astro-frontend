@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const CardSection = () => {
 	const [ events, setEvents ] = useState(null);
 	useEffect(() => {
-		fetch('http://localhost:3500/events')
+		fetch(`${process.env.REACT_APP_BACKEND}/events`)
 			.then((res) => {
 				return res.json();
 			})
