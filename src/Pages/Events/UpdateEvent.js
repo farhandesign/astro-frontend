@@ -7,6 +7,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 
 const UpdateEvent = (props) => {
 	const [ event, setEvent ] = useState();
+	const [ eventImage, setEventImage ] = useState();
 	useEffect(() => {
 		fetch(`${process.env.REACT_APP_BACKEND}/events/${props.match.params.id}`)
 			.then((res) => {
@@ -14,6 +15,7 @@ const UpdateEvent = (props) => {
 			})
 			.then((data) => {
 				setEvent(data);
+				setEventImage(data.eventImg);
 			});
 	}, []);
 
@@ -37,6 +39,15 @@ const UpdateEvent = (props) => {
 
 	// For the form Images
 	const formData = new FormData();
+	// Attach File
+	const attachFile = (evt) => {
+		const files = Array.from(evt.target.files);
+
+		console.log(evt.target.files);
+		files.forEach((file, index) => {
+			formData.append(index, file);
+		});
+	};
 
 	// Select Date
 	const handleDateChange = (date) => {
@@ -106,7 +117,15 @@ const UpdateEvent = (props) => {
 	return (
 		<div className="container text-start" style={{ maxWidth: '600px' }}>
 			<h1 className="mt-4 mb-3">Edit Event</h1>
-			<img style={{ objectFit: 'cover' }} src={event && event.eventImg} className="card-img-top" alt="..." />
+			<img style={{ objectFit: 'cover' }} src={eventImage && eventImage} className="card-img-top" alt="..." />
+
+			<div className="mb-3">
+				<label htmlFor="formFile" className="form-label">
+					Upload Image
+				</label>
+				<input onChange={attachFile} className="form-control" type="file" id="formFile" />
+			</div>
+
 			<div className="mb-3 mt-3">
 				<label htmlFor="exampleInputTitle1" className="form-label">
 					Title

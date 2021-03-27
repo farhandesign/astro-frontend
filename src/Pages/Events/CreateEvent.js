@@ -107,7 +107,6 @@ const CreateEvent = () => {
 	return (
 		<div className="container text-start" style={{ maxWidth: '600px' }}>
 			<h1 className="mt-4 mb-3">Create An Event</h1>
-
 			<div className="mb-3">
 				<label htmlFor="formFile" className="form-label">
 					Upload Image
