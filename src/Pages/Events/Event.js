@@ -77,8 +77,6 @@ const Event = (props) => {
 													borderRadius: '50px',
 													padding: '5px 20px'
 												}}
-												event={e._id}
-												money={e.price}
 											>
 												Buy Ticket
 											</Link>
