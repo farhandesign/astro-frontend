@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
@@ -127,6 +126,7 @@ const CreateEvent = () => {
 					aria-describedby="titleHelp"
 				/>
 			</div>
+
 			<div className="mb-3">
 				<label htmlFor="exampleInputDescription1" className="form-label">
 					Description
