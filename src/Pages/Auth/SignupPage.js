@@ -81,7 +81,7 @@ const SignupPage = () => {
 		<div className="container text-start mt-5" style={{ maxWidth: '600px' }}>
 			<h1 className="mt-4 mb-4">Sign Up</h1>
 			<div className="mb-3">
-				<label for="exampleInputFirstName1" className="form-label">
+				<label htmlFor="exampleInputFirstName1" className="form-label">
 					First name
 				</label>
 				<input
@@ -93,7 +93,7 @@ const SignupPage = () => {
 				/>
 			</div>
 			<div className="mb-3">
-				<label for="exampleInputLastName1" className="form-label">
+				<label htmlFor="exampleInputLastName1" className="form-label">
 					Last name
 				</label>
 				<input
@@ -105,7 +105,7 @@ const SignupPage = () => {
 				/>
 			</div>
 			<div className="mb-3">
-				<label for="exampleInputEmail1" className="form-label">
+				<label htmlFor="exampleInputEmail1" className="form-label">
 					Email address
 				</label>
 				<input
@@ -120,7 +120,7 @@ const SignupPage = () => {
 				</div>
 			</div>
 			<div className="mb-3">
-				<label for="exampleInputPassword1" className="form-label">
+				<label htmlFor="exampleInputPassword1" className="form-label">
 					Password
 				</label>
 				<input
