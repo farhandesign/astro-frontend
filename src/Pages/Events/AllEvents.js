@@ -38,7 +38,6 @@ const AllEvents = () => {
 									price={event.price}
 									location={event.address}
 									date={event.eventDate}
-									time={event.time}
 									link={`/events/${event._id}`}
 								/>
 							);
