@@ -7,7 +7,7 @@ const AllEvents = () => {
 	const [ slice, setSlice ] = useState(6);
 	const [ events, setEvents ] = useState(null);
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_BACKEND}/events`)
+		fetch(`${process.env.REACT_APP_BACKEND}/events/all`)
 			.then((res) => {
 				return res.json();
 			})
@@ -43,7 +43,6 @@ const AllEvents = () => {
 								/>
 							);
 						})
-						.reverse()
 						.slice(0, slice)}
 
 				{!events &&

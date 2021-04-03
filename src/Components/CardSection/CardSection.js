@@ -38,7 +38,6 @@ const CardSection = () => {
 								/>
 							);
 						})
-						.reverse()
 						.slice(0, 6)}
 
 				{!events &&
