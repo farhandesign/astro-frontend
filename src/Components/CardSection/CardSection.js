@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../Card/Card';
 import { Link } from 'react-router-dom';
+import SkeletonElement from '../Skeletons/SkeletonElement';
 
 const CardSection = () => {
 	const [ events, setEvents ] = useState(null);
@@ -33,13 +34,17 @@ const CardSection = () => {
 									price={event.price}
 									location={event.address}
 									date={event.eventDate}
-									time={event.time}
 									link={`/events/${event._id}`}
 								/>
 							);
 						})
 						.reverse()
 						.slice(0, 6)}
+
+				{!events &&
+					[ 1, 2, 3, 4, 5, 6 ].map((skeleton) => {
+						return <SkeletonElement />;
+					})}
 			</div>
 			<Link to="/events" className="btn btn-outline-primary my-3">
 				View All Events

@@ -1,0 +1,25 @@
+.skeleton {
+	color: #ddd;
+}
+
+.skeleton-image {
+	width: 100%;
+	height: 300px;
+	background: #ddd;
+}
+.skeleton-title {
+	background: #ddd;
+	color: #ddd;
+}
+
+.skeleton-description {
+	background: #ddd;
+	color: #ddd;
+}
+
+.skeleton-item {
+	color: #ddd;
+	background: #ddd;
+	margin: 0;
+	padding: 0;
+}

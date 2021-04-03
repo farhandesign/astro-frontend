@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../Components/Card/Card';
+import SkeletonElement from '../../Components/Skeletons/SkeletonElement';
 
 const AllEvents = () => {
 	const [ arr, setArr ] = useState([]);
@@ -38,13 +39,17 @@ const AllEvents = () => {
 									price={event.price}
 									location={event.address}
 									date={event.eventDate}
-									time={event.time}
 									link={`/events/${event._id}`}
 								/>
 							);
 						})
 						.reverse()
 						.slice(0, slice)}
+
+				{!events &&
+					[ 1, 2, 3, 4, 5, 6 ].map((skeleton) => {
+						return <SkeletonElement />;
+					})}
 			</div>
 			{slice <= arr.length && (
 				<button className="btn btn-outline-primary my-3" onClick={handleShow}>

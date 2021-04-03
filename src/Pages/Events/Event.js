@@ -65,8 +65,8 @@ const Event = (props) => {
 									<ul className="list-group list-group-flush">
 										<li className="list-group-item">
 											<MdDateRange className="react__icons" size="1.3em" color="#8C939D" />
-											{e.eventDate &&
-												e.eventDate.slice(0, 10).split('-').reverse().join('-')} at {e.time}
+											{e.eventDate && e.eventDate.slice(0, 10).split('-').reverse().join('-')} at
+											{e.eventDate.slice(15, 21).split('-').reverse().join('-')}
 										</li>
 										<li className="list-group-item">
 											<FaTicketAlt className="react__icons" size="1.3em" color="#8C939D" /> Price:{' '}
