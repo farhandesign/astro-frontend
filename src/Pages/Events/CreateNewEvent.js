@@ -13,6 +13,7 @@ const CreateNewEvent = () => {
 	const [ price, updatePrice, resetPrice ] = useInputState('');
 	const [ location, updateLocation, resetLocation ] = useInputState('');
 	const [ image, setImage ] = useState('');
+	const [ previewImg, setPreviewImg ] = useState('');
 	const [ date, setDate ] = useState(new Date(Date.now()));
 
 	// This component will have four states:
@@ -24,8 +25,18 @@ const CreateNewEvent = () => {
 	const formData = new FormData();
 
 	const attachFile = (e) => {
-		setImage(e.target.files[0]);
-		console.log(e.target.files);
+		let selectedImg = e.target.files[0];
+		const ALLOWED_TYPES = [ 'image/png', 'image/jpeg', 'image/jpg' ];
+		if (selectedImg && ALLOWED_TYPES.includes(selectedImg.type)) {
+			let reader = new FileReader();
+			reader.onloadend = () => {
+				setPreviewImg(reader.result);
+				setImage(selectedImg);
+			};
+			reader.readAsDataURL(selectedImg);
+		} else {
+			console.log('File not supported');
+		}
 	};
 
 	const handleDateChange = (date) => {
@@ -112,20 +123,14 @@ const CreateNewEvent = () => {
 		<div className="container text-start" style={{ maxWidth: '600px' }}>
 			<h1 className="mt-4 mb-3">Create An Event</h1>
 
-			{state === 'creating' && <p>creating...</p>}
-
-			{state === 'successful' && <div className="alert alert-success">Successful</div>}
-			{state === 'successful' && handleTimeout()}
-
-			{state === 'unsuccessful' && <div className="alert alert-danger">Please try again.</div>}
-
-			{state === 'failed' && (
-				<div className="alert alert-danger">
-					<ul>{errorsState.map((error) => <li>{error}</li>)}</ul>
-				</div>
-			)}
-
 			<div className="mb-3">
+				{previewImg && (
+					<img
+						src={previewImg}
+						alt="Event"
+						style={{ objectFit: 'cover', width: '100%', height: '300px', marginBottom: '16px' }}
+					/>
+				)}
 				<label htmlFor="formFile" className="form-label">
 					Upload Image
 				</label>
@@ -233,6 +238,18 @@ const CreateNewEvent = () => {
 					aria-describedby="AddressHelp"
 				/>
 			</div>
+			{state === 'creating' && <p>creating...</p>}
+
+			{state === 'successful' && <div className="alert alert-success">Successful</div>}
+			{state === 'successful' && handleTimeout()}
+
+			{state === 'unsuccessful' && <div className="alert alert-danger">Please try again.</div>}
+
+			{state === 'failed' && (
+				<div className="alert alert-danger">
+					<ul>{errorsState.map((error) => <li>{error}</li>)}</ul>
+				</div>
+			)}
 
 			<button onClick={handleSubmit} type="submit" className="btn btn-primary mb-4 mt-2">
 				Create
