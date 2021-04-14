@@ -66,12 +66,19 @@ const Event = (props) => {
 										<li className="list-group-item">
 											<MdDateRange className="react__icons" size="1.3em" color="#8C939D" />
 											{e.eventDate && e.eventDate.slice(0, 10).split('-').reverse().join('-')} at
-											{e.eventDate.slice(15, 21).split('-').reverse().join('-')}
+											{e.eventDate && e.eventDate.slice(15, 21).split('-').reverse().join('-')}
 										</li>
 										<li className="list-group-item">
 											<FaTicketAlt className="react__icons" size="1.3em" color="#8C939D" /> Price:{' '}
 											{e.price} AED / Guest
 										</li>
+
+										<li className="list-group-item">
+											<Link to={`/buy/${e._id}`} price={e.price}>
+												Buy Tickets
+											</Link>
+										</li>
+
 										<li className="list-group-item">
 											<ImLocation className="react__icons" size="1.3em" color="#8C939D" />{' '}
 											Location: {e.address}

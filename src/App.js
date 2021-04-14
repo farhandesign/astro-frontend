@@ -11,6 +11,7 @@ import UpdateEvent from './Pages/Events/UpdateEvent';
 import LoginPage from './Pages/Auth/LoginPage';
 import ForgotPassword from './Pages/Auth/ForgotPassword';
 import ResetPassword from './Pages/Auth/ResetPassword';
+import BuyTickets from './Pages/Events/BuyTickets';
 
 import PrivateRoute from './Pages/PrivateRoute';
 import PrivatePage from './Pages/PrivatePage';
@@ -30,6 +31,8 @@ function App() {
 					<LayoutRoute path="/login" exact={true} component={LoginPage} />
 					<LayoutRoute path="/forgotpassword" exact={true} component={ForgotPassword} />
 					<LayoutRoute path="/passwordreset/:resetToken" exact={true} component={ResetPassword} />
+
+					<LayoutRoute path="/buy/:id" exact={true} component={BuyTickets} />
 				</Switch>
 			</BrowserRouter>
 		</div>
