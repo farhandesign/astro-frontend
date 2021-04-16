@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 import ButtonB from '../Buttons/ButtonB';
 
+import AuthContext from '../../context/auth-context';
+
 const NavBar = (props) => {
+	const { user } = useContext(AuthContext);
+
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark" style={{ background: '#1F2128' }}>
 			<div className="container-fluid container-lg">
@@ -33,21 +37,35 @@ const NavBar = (props) => {
 						</li>
 					</ul>
 					<ul className="navbar-nav" style={{ marginLeft: 'auto' }}>
-						<li className="nav-item">
-							<Link className="nav-link" aria-current="page" to="/login">
-								Login
-							</Link>
-						</li>
-						<li className="nav-item">
-							<Link className="nav-link" to="/signup">
-								Sign up
-							</Link>
-						</li>
-						{/* <li className="nav-item">
-							<a className="nav-link" href="#">
-								Sign out
-							</a>
-						</li> */}
+						{user ? (
+							<li className="nav-item">
+								<Link className="nav-link" aria-current="page" to="/private">
+									{user}
+								</Link>
+							</li>
+						) : (
+							<li className="nav-item">
+								<Link className="nav-link" aria-current="page" to="/login">
+									Login
+								</Link>
+							</li>
+						)}
+
+						{user && (
+							<li className="nav-item">
+								<Link className="nav-link" aria-current="page" to="/logout">
+									Logout
+								</Link>
+							</li>
+						)}
+
+						{!user && (
+							<li className="nav-item">
+								<Link className="nav-link" to="/signup">
+									Sign up
+								</Link>
+							</li>
+						)}
 					</ul>
 				</div>
 			</div>

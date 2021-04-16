@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-
+import AuthContext from '../context/auth-context';
 const PrivatePage = ({ history }) => {
 	const [ error, setError ] = useState('');
 	const [ privateData, setPrivateData ] = useState('');
+
+	const { user } = useContext(AuthContext);
 
 	useEffect(
 		() => {
@@ -41,6 +43,7 @@ const PrivatePage = ({ history }) => {
 	) : (
 		<div>
 			{privateData}
+			<p>{user}</p>
 			<button onClick={logoutHandler}>Logout</button>
 		</div>
 	);
