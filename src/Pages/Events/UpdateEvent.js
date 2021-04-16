@@ -7,15 +7,18 @@ import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from 
 
 const UpdateEvent = (props) => {
 	const [ event, setEvent ] = useState();
-	useEffect(() => {
-		fetch(`${process.env.REACT_APP_BACKEND}/events/${props.match.params.id}`)
-			.then((res) => {
-				return res.json();
-			})
-			.then((data) => {
-				setEvent(data);
-			});
-	}, []);
+	useEffect(
+		() => {
+			fetch(`${process.env.REACT_APP_BACKEND}/events/${props.match.params.id}`)
+				.then((res) => {
+					return res.json();
+				})
+				.then((data) => {
+					setEvent(data);
+				});
+		},
+		[ props.match.params.id ]
+	);
 
 	const [ date, setDate ] = useState(new Date(Date.now()));
 

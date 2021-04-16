@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/auth-context';
 
 const LoginPage = ({ history }) => {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 	const [ error, setError ] = useState('');
+
+	const { setUser } = useContext(AuthContext);
 
 	useEffect(
 		() => {
@@ -31,8 +34,10 @@ const LoginPage = ({ history }) => {
 				{ email, password },
 				config
 			);
-
 			localStorage.setItem('authToken', data.token);
+
+			setUser(email);
+
 			history.push('/');
 		} catch (error) {
 			setError(error.response.data.error);
