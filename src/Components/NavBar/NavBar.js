@@ -1,12 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import './NavBar.css';
 import ButtonB from '../Buttons/ButtonB';
-
 import AuthContext from '../../context/auth-context';
 
 const NavBar = (props) => {
-	const { user } = useContext(AuthContext);
+	const { user, setUser } = useContext(AuthContext);
+
+	useEffect(
+		() => {
+			const config = {
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${localStorage.getItem('authToken')}`
+				}
+			};
+
+			fetch(`${process.env.REACT_APP_BACKEND}/api/private`, config)
+				.then((res) => {
+					return res.json();
+				})
+				.then((data) => {
+					setUser(data);
+				});
+		},
+		[ setUser ]
+	);
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark" style={{ background: '#1F2128' }}>
@@ -36,37 +56,35 @@ const NavBar = (props) => {
 							<ButtonB />
 						</li>
 					</ul>
-					<ul className="navbar-nav" style={{ marginLeft: 'auto' }}>
-						{user ? (
+
+					{user && (
+						<ul className="navbar-nav" style={{ marginLeft: 'auto' }}>
 							<li className="nav-item">
 								<Link className="nav-link" aria-current="page" to="/private">
-									{user}
+									{user.email}
 								</Link>
 							</li>
-						) : (
-							<li className="nav-item">
-								<Link className="nav-link" aria-current="page" to="/login">
-									Login
-								</Link>
-							</li>
-						)}
-
-						{user && (
 							<li className="nav-item">
 								<Link className="nav-link" aria-current="page" to="/logout">
 									Logout
 								</Link>
 							</li>
-						)}
-
-						{!user && (
+						</ul>
+					)}
+					{!user && (
+						<ul className="navbar-nav" style={{ marginLeft: 'auto' }}>
+							<li className="nav-item">
+								<Link className="nav-link" aria-current="page" to="/login">
+									Login
+								</Link>
+							</li>
 							<li className="nav-item">
 								<Link className="nav-link" to="/signup">
 									Sign up
 								</Link>
 							</li>
-						)}
-					</ul>
+						</ul>
+					)}
 				</div>
 			</div>
 		</nav>

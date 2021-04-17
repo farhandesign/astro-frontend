@@ -135,7 +135,7 @@ const SignupPage = ({ history }) => {
 				/>
 			</div>
 
-			<button type="submit" className="btn btn-primary">
+			<button type="submit" className="btn btn-primary mb-3">
 				Sign up
 			</button>
 

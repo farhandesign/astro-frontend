@@ -32,6 +32,7 @@ const AllEvents = () => {
 						.map((event) => {
 							return (
 								<Card
+									key={event._id}
 									title={event.name}
 									imgSrc={event.eventImg}
 									description={event.description}

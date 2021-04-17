@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import AuthContext from '../../context/auth-context';
 
 const LoginPage = ({ history }) => {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 	const [ error, setError ] = useState('');
-
-	const { setUser } = useContext(AuthContext);
 
 	useEffect(
 		() => {
@@ -36,9 +33,8 @@ const LoginPage = ({ history }) => {
 			);
 			localStorage.setItem('authToken', data.token);
 
-			setUser(email);
-
 			history.push('/');
+			window.location.reload();
 		} catch (error) {
 			setError(error.response.data.error);
 			setTimeout(() => {
@@ -88,12 +84,12 @@ const LoginPage = ({ history }) => {
 				/>
 			</div>
 
-			<button type="submit" className="btn btn-primary" tabIndex={3}>
+			<button type="submit" className="btn btn-primary mb-3" tabIndex={3}>
 				Login
 			</button>
 
 			<div>
-				Don't an Account? <Link to="/signup">Sign up</Link>
+				Don't have an Account? <Link to="/signup">Sign up</Link>
 			</div>
 		</form>
 	);
