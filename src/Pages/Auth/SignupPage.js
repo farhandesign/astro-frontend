@@ -46,6 +46,7 @@ const SignupPage = ({ history }) => {
 
 			localStorage.setItem('authToken', data.token);
 			history.push('/');
+			window.location.reload();
 		} catch (error) {
 			setError(error.response.data.error);
 			setTimeout(() => {
