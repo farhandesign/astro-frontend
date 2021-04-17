@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
+import AuthContext from '../../context/auth-context';
 
 const ResetPassword = ({ match }) => {
 	const [ password, setPassword ] = useState('');
 	const [ confirmPassword, setConfirmPassword ] = useState('');
 	const [ error, setError ] = useState('');
 	const [ success, setSuccess ] = useState('');
+
+	const { setUser } = useContext(AuthContext);
+
+	localStorage.removeItem('authToken');
+	setUser(null);
 
 	const resetPasswordHandler = async (e) => {
 		e.preventDefault();

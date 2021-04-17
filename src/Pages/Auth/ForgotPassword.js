@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+
+import AuthContext from '../../context/auth-context';
 
 const ForgotPassword = () => {
 	const [ email, setEmail ] = useState('');
 	const [ error, setError ] = useState('');
 	const [ success, setSuccess ] = useState('');
+
+	const { setUser } = useContext(AuthContext);
+
+	localStorage.removeItem('authToken');
+	setUser(null);
 
 	const forgotPasswordHandler = async (e) => {
 		e.preventDefault();
