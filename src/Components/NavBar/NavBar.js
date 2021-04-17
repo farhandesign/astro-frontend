@@ -6,27 +6,7 @@ import ButtonB from '../Buttons/ButtonB';
 import AuthContext from '../../context/auth-context';
 
 const NavBar = (props) => {
-	const { user, setUser } = useContext(AuthContext);
-
-	useEffect(
-		() => {
-			const config = {
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${localStorage.getItem('authToken')}`
-				}
-			};
-
-			fetch(`${process.env.REACT_APP_BACKEND}/api/private`, config)
-				.then((res) => {
-					return res.json();
-				})
-				.then((data) => {
-					setUser(data);
-				});
-		},
-		[ setUser ]
-	);
+	const { user } = useContext(AuthContext);
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark" style={{ background: '#1F2128' }}>
