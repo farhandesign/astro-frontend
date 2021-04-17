@@ -36,7 +36,6 @@ const ResetPassword = ({ match }) => {
 			);
 
 			setSuccess(data.data);
-			window.location.reload();
 		} catch (error) {
 			setError(error.response.data.error);
 			setTimeout(() => {
